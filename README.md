@@ -10,7 +10,7 @@
   - your WordPress website files
 
 ```mermaid
-flowchart TD
+flowchart LR
   www(("www"))
   %% container
   c_wp["WordPress + PHP"]
