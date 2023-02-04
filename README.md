@@ -2,7 +2,7 @@
 
 ## structure
 - containers
-  - Nginx (TLS v1.2 or v1.3)
+  - Nginx (TLSv1.2 or TLSv1.3)
   - WordPress without Nginx
   - MariaDB without Nginx
 - volumes
