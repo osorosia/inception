@@ -9,6 +9,29 @@
   - your WordPress database
   - your WordPress website files
 
+```mermaid
+flowchart TD
+  www(("www"))
+  %% container
+  c_wp["WordPress + PHP"]
+  c_nginx["Nginx"]
+  c_db["DB"]
+  %% volume
+  v_db[("DB")]
+  v_wp[("WordPress")]
+
+  www <-->|443| c_nginx
+  subgraph Computer HOST
+    subgraph Docker network
+      c_nginx <-->|9000| c_wp
+      c_wp <-->|3306| c_db
+    end
+    c_nginx <--> v_wp
+    c_wp <--> v_wp
+    c_db <--> v_db
+  end
+```
+
 ## note
 - Read about:
   - PID 1
