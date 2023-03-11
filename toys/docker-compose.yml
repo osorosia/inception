@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   wordpress:
-    image: wordpress
+    build: requirements/wordpress
     container_name: wordpress
     restart: always
     ports:
@@ -15,7 +15,7 @@ services:
     volumes:
       - ./volume_wordpress:/var/www/html
   mariadb:
-    image: mariadb:10.5
+    build: requirements/mariadb
     container_name: mariadb
     restart: always
     volumes:
@@ -27,7 +27,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       TZ: Asia/Tokyo
   nginx:
-    image: nginx
+    build: requirements/nginx
     container_name: nginx
     restart: always
     ports:
