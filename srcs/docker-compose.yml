@@ -34,8 +34,8 @@ services:
     ports:
       - 8081:80
     volumes:
-      - ./requirements/nginx/conf/default.conf:/etc/nginx/http.d/default.conf
       - ./volume_wordpress:/var/www/html
+      # - ./requirements/nginx/conf/default.conf:/etc/nginx/http.d/default.conf
     restart: always
 
   # phpmyadmin:
