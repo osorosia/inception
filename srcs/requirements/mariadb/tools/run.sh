@@ -1,25 +1,12 @@
 #!/bin/sh
-echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-echo X ENV
-echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-echo $MYSQL_DATABASE
-echo $MYSQL_USER
-echo $MYSQL_PASSWORD
-echo $MYSQL_ROOT_PASSWORD
 
 if [ ! -d "/run/mysqld" ]; then
-	echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	echo X /run/mysqld
-	echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	mkdir -p /run/mysqld
 fi
 chown -R mysql:mysql /run/mysqld
 
 chown -R mysql:mysql /var/lib/mysql
 if [ ! -d /var/lib/mysql/mysql ]; then
-	echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	echo X /var/lib/mysql/mysql
-	echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	mysql_install_db --user=mysql --ldata=/var/lib/mysql >/dev/null
 
 	tfile=$(mktemp)
