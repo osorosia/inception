@@ -5,5 +5,5 @@ RUN apk update && apk add --no-cache \
     mariadb-client
 
 COPY tools/run.sh /scripts/run.sh
-RUN chmod 755 /scripts/run.sh
+RUN chmod +x /scripts/run.sh
 CMD ["/scripts/run.sh"]
