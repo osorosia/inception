@@ -1,3 +1,4 @@
+# TODO: create command to add user to `docker` group
 .PHONY: all
 all: up
 
@@ -16,7 +17,6 @@ vc: down
 .PHONY: ic
 ic: down
 	docker image rm -f `docker image ls -q`
-
 
 .PHONY: cache
 cache: down
