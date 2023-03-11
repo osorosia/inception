@@ -4,20 +4,21 @@ services:
   wordpress:
     build: requirements/wordpress
     container_name: wordpress
-    restart: always
+    depends_on:
+      - mariadb
     ports:
       - 8080:80
+    volumes:
+      - ./volume_wordpress:/var/www/html
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-    volumes:
-      - ./volume_wordpress:/var/www/html
+    restart: always
   mariadb:
     build: requirements/mariadb
     container_name: mariadb
-    restart: always
     volumes:
       - ./volume_mariadb:/var/lib/mysql
     environment:
@@ -26,13 +27,17 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       TZ: Asia/Tokyo
+    restart: always
   nginx:
     build: requirements/nginx
     container_name: nginx
-    restart: always
-    ports:
-      - 8081:80
     depends_on:
       - wordpress
+    ports:
+      - 8081:80
+    volumes:
+      - ./requirements/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./volume_wordpress:/var/www/html
+    restart: always
 
   # phpmyadmin:
