@@ -26,9 +26,9 @@ flowchart LR
       c_nginx <-->|9000| c_wp
       c_wp <-->|3306| c_db
     end
-    c_nginx <--> v_wp
-    c_wp <--> v_wp
-    c_db <--> v_db
+    c_nginx <-->|volume| v_wp
+    c_wp <-->|volume| v_wp
+    c_db <-->|volume| v_db
   end
 ```
 
