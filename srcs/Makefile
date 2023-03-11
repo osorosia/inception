@@ -10,3 +10,4 @@ down:
 
 .PHONY: clean
 clean: down
+	rm -rf volume_*
