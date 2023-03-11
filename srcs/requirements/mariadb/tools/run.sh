@@ -14,8 +14,6 @@ if [ ! -d /var/lib/mysql/mysql ]; then
 		return 1
 	fi
 
-	echo $MYSQL_ROOT_PASSWORD
-
 	cat <<EOF >$tfile
 USE mysql;
 FLUSH PRIVILEGES;
