@@ -27,7 +27,6 @@ RUN wget https://wordpress.org/latest.tar.gz && \
     cp -rf wordpress/* /var/www/html && \
     rm -rf wordpress latest.tar.gz
 
-COPY conf/wp-config.php /var/www/html 
 RUN chmod -R 777 /var/www/html/* && \
 	mkdir /restore && \
     cp -rf /var/www/html/* /restore

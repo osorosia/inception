@@ -3,13 +3,23 @@
 if [ ! -f wp-config.php ]; then
   cp -rf /restore/* /var/www/html
 fi
+wp config create \
+  --dbhost=$WORDPRESS_DB_HOST \
+  --dbname=$WORDPRESS_DB_NAME \
+  --dbuser=$WORDPRESS_DB_USER \
+  --dbpass=$WORDPRESS_DB_PASSWORD \
+  --dbcharset="utf8mb4" \
+  --dbcollate="utf8mb4_unicode_ci" \
+  --skip-check \
+  --force \
+  --allow-root
 
 echo "Connecting database..."
 while ! echo "show databases;" | mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD $WORDPRESS_DB_NAME >/dev/null 2>/dev/null; do
   sleep 1
 done
 
-cat << EOF | mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD $WORDPRESS_DB_NAME | grep wp_users > /dev/null
+cat <<EOF | mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD $WORDPRESS_DB_NAME | grep wp_users >/dev/null
 show tables;
 EOF
 result=$?
