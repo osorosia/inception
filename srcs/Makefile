@@ -3,12 +3,15 @@
 all: up
 
 .PHONY: up
-up:
+up: down vc
 	docker-compose up --build
 
 .PHONY: down
 down:
 	docker-compose down
+
+prune: down vc cache
+	docker system prune -f
 
 .PHONY: vc
 vc: down
@@ -20,4 +23,8 @@ ic: down
 
 .PHONY: cache
 cache: down
-	docker builder prune
+	yse | docker builder prune
+
+.PHONY: wordpress w
+wordpress w:
+	docker-compose run wordpress sh

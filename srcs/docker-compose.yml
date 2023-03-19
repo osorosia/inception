@@ -1,24 +1,11 @@
 version: '3.8'
 
 services:
-  wordpress:
-    build: requirements/wordpress
-    container_name: wordpress
-    depends_on:
-      - mariadb
-    volumes:
-      - ./volume_wordpress:/var/www/html
-    environment:
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
-      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-    restart: always
   mariadb:
     build: requirements/mariadb
     container_name: mariadb
     volumes:
-      - ./volume_mariadb:/var/lib/mysql
+      - ./volume_db:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -35,4 +22,19 @@ services:
       - 8081:80
     volumes:
       - ./volume_wordpress:/var/www/html
+    restart: always
+  wordpress:
+    build: requirements/wordpress
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - ./volume_wordpress:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    ports:
+      - "9000:9000"
     restart: always
