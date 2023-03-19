@@ -1,18 +1,18 @@
-FROM alpine:3.13
+FROM alpine:3.16
 
 RUN apk update && apk add --no-cache \
 	mariadb-client \
-	php7-json \
-	php7-phar \
-    php7 \
-    php7-curl \
-    php7-fpm \
-    php7-gd \
-    php7-mbstring \
-    php7-mysqli \
-    php7-opcache \
-    php7-xml \
-    php7-zlib \
+    php8 \
+    php8-curl \
+    php8-fpm \
+    php8-gd \
+    php8-json \
+    php8-mbstring \
+    php8-mysqli \
+    php8-opcache \
+    php8-phar \
+    php8-xml \
+    php8-zlib \
     unzip \
     wget \
     ;	
@@ -32,7 +32,7 @@ RUN chmod -R 777 /var/www/html/* && \
 	mkdir /restore && \
     cp -rf /var/www/html/* /restore
 
-COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
+COPY conf/www.conf /etc/php8/php-fpm.d/www.conf
 COPY tools/run.sh /scripts/run.sh 
 RUN chmod +x /scripts/*
 

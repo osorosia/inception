@@ -5,7 +5,7 @@ if [ ! -f wp-config.php ]; then
 fi
 
 echo "Connecting database..."
-while ! mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD $WORDPRESS_DB_NAME 2>/dev/null; do
+while ! echo "show databases;" | mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD $WORDPRESS_DB_NAME >/dev/null 2>/dev/null; do
   sleep 1
 done
 
@@ -31,4 +31,4 @@ if [ $result -ne 0 ]; then
 fi
 
 echo "Wordpress started!"
-/usr/sbin/php-fpm7 -F
+exec /usr/sbin/php-fpm8 -F
