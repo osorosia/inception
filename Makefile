@@ -17,8 +17,8 @@ prune: down vc
 
 .PHONY: vc
 vc: down
-	rm -rf volume_*
+	rm -rf ~/data
 
 .PHONY: host
 host:
-	echo "127.0.0.1 rnishimo.42.fr" >> /etc/hosts
+	cat /etc/hosts | grep "127.0.0.1 rnishimo.42.fr" >/dev/null || echo "127.0.0.1 rnishimo.42.fr" >> /etc/hosts

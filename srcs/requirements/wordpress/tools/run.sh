@@ -27,16 +27,18 @@ result=$?
 if [ $result -ne 0 ]; then
   echo "Installing Wordpress..."
   wp core install \
-    --url=rnishimo.42.fr \
+    --url=$WORDPRESS_URL \
     --title=rnishimo_blog \
-    --admin_name=kanrisha \
-    --admin_password=a \
-    --admin_email=kanrisha@example.com \
+    --admin_name=$WORDPRESS_ADMIN_NAME \
+    --admin_password=$WORDPRESS_ADMIN_PASSWORD \
+    --admin_email=$WORDPRESS_ADMIN_EMAIL \
     --path=/var/www/html \
     --skip-email \
     --allow-root
-  wp user create hutu hutu@example.com \
-    --user_pass=a \
+  wp user create \
+    $WORDPRESS_USER_NAME \
+    $WORDPRESS_USER_EMAIL \
+    --user_pass=$WORDPRESS_USER_PASSWORD \
     --role=editor \
     --allow-root
 fi
