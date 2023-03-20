@@ -17,7 +17,9 @@ prune: down vc
 
 .PHONY: vc
 vc: down
-	rm -rf ~/data
+	rm -rf /home/${USER}/data
+	mkdir -p /home/${USER}/data/volume_wordpress
+	mkdir -p /home/${USER}/data/volume_db
 
 .PHONY: host
 host:
