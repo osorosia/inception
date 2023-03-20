@@ -1,10 +1,24 @@
-DOCKER_COMPOSE_FILE=srcs/docker-compose.yml
+DOCKER_COMPOSE_COMMAND=docker-compose -f srcs/docker-compose.yml
 
-up:
-	docker-compose -f ${DOCKER_COMPOSE_FILE} up
+.PHONY: all
+all: down prune up
 
+.PHONY: up
+up: host
+	${DOCKER_COMPOSE_COMMAND} up --build
+
+.PHONY: down
 down:
-	docker-compose -f ${DOCKER_COMPOSE_FILE} down
+	${DOCKER_COMPOSE_COMMAND} down
 
-build:
-	docker-compose -f ${DOCKER_COMPOSE_FILE} up --build
+.PHONY: prune
+prune: down vc
+	docker system prune -f
+
+.PHONY: vc
+vc: down
+	rm -rf volume_*
+
+.PHONY: host
+host:
+	echo "127.0.0.1 rnishimo.42.fr" >> /etc/hosts
