@@ -24,3 +24,10 @@ vc: down
 .PHONY: host
 host:
 	cat /etc/hosts | grep "127.0.0.1 rnishimo.42.fr" >/dev/null || echo "127.0.0.1 rnishimo.42.fr" >> /etc/hosts
+
+.PHONY: clean
+clean: down
+	docker rm -f `docker ps -aq` || true
+	docker volume rm -f `docker volume ls -q` || true
+	docker image rm -f `docker image ls -q` || true
+	docker network rm -f `docker network ls -q` || true
