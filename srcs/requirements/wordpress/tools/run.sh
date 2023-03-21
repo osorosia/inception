@@ -13,6 +13,7 @@ wp config create \
   --skip-check \
   --force \
   --allow-root
+chmod 777 wp-config.php
 
 echo "Connecting database..."
 while ! echo "show databases;" | mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD $WORDPRESS_DB_NAME >/dev/null 2>/dev/null; do

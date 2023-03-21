@@ -1,11 +1,11 @@
-DOCKER_COMPOSE_COMMAND=docker-compose -f srcs/docker-compose.yml
+DOCKER_COMPOSE_COMMAND=docker compose -f srcs/docker-compose.yml
 
 .PHONY: all
 all: down prune up
 
 .PHONY: up
 up: host
-	${DOCKER_COMPOSE_COMMAND} up --build
+	${DOCKER_COMPOSE_COMMAND} up --build || true
 
 .PHONY: down
 down:
