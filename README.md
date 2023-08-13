@@ -1,5 +1,9 @@
 # inception
 
+42 (https://42.fr/en/) の課題として、Dockerを使ったWordpressの環境構築を行いました。
+
+課題要件は下記にまとめられています。
+
 ## structure
 - containers
   - Nginx (TLSv1.2 or TLSv1.3)
